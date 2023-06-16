@@ -1,0 +1,167 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Barista"
+        xmlns:View="clr-namespace:Barista.View" x:Class="Barista.MainWindow"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+Title="MainWindow" Height="720" Width="1280" ResizeMode="NoResize" Foreground="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="{x:Null}" MouseLeftButtonDown="dragMe">
+    <Window.Resources>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                       SnapsToDevicePixels="true"
+                       Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                       StrokeDashArray="1 2"
+                       StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="Button.Static.Background"
+                     Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border"
+                     Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background"
+                     Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border"
+                     Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background"
+                     Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border"
+                     Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background"
+                     Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border"
+                     Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground"
+                     Color="#FF838383" />
+
+        <Style x:Key="DefaultButtonStyle"
+           TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="border" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="/Resources/TeaBagSelected.png" Stretch="Uniform" TileMode="None"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush Opacity="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border CornerRadius="10" Background="#FF584736" BorderBrush="#FFE6E6E6" BorderThickness="1" >
+        <Grid>
+
+            <View:BaseDrinkControl HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Height="260" Width="321" Padding="0,0,0,6"/>
+            <View:AdditiveControl HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,39" Width="321" Height="360"/>
+            <View:CupDisplayer HorizontalAlignment="Left" VerticalAlignment="Center" Width="383" Height="620" Margin="639,0,0,0"/>
+            <Image x:Name="Coffee"
+                   gif:ImageBehavior.AnimatedSource="pack://application:,,,/Resources/CoffeePressed.gif" 
+                   Width="{Binding ActualWidth, ElementName=CloseButton, Mode=OneWay}"
+                   Height="{Binding ActualHeight, ElementName=CloseButton, Mode=OneWay}"
+                   HorizontalAlignment="{Binding HorizontalAlignment,ElementName=CloseButton, Mode=OneWay}"
+                   VerticalAlignment="{Binding VerticalAlignment,ElementName=CloseButton, Mode=OneWay}"
+                   Margin="{Binding Margin,ElementName=CloseButton}" Stretch="Fill"
+                   ToolTip="Ты уверен">
+                <Image.Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=CloseButton, Path=IsPressed}" Value="true">
+                                <Setter Property="Visibility"  Value="Visible"/>
+                            </DataTrigger>    
+                            <DataTrigger Binding="{Binding ElementName=CloseButton, Path=IsPressed}" Value="false">
+                                <Setter Property="Visibility"  Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <Label HorizontalAlignment="Right" 
+                   VerticalAlignment="Top" 
+                   Margin="0,50,10,0" 
+                   FontFamily="Doloman Pavljenko Light"
+                   Content="Погоди! Кофе ещё может показать себя!"
+                   Foreground="White" 
+                   FontSize="16"
+                   >
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=CloseButton, Path=IsPressed}" Value="true">
+                                <Setter Property="Visibility"  Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=CloseButton, Path=IsPressed}" Value="false">
+                                <Setter Property="Visibility"  Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <Button x:Name="CloseButton"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top" 
+                    Margin="0,10,10,0" 
+                    Width="40" 
+                    Height="34" 
+                    BorderBrush="{x:Null}"
+                    Style="{DynamicResource DefaultButtonStyle}" 
+                    ToolTip="Я чаехлёб" Click="Close"
+                    Tag="NoHide">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Resources/TeaBag.png" Stretch="Uniform" TileMode="None"/>
+                </Button.Background>
+
+            </Button>
+
+        </Grid>
+    </Border>
+</Window>

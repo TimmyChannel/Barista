@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "IFJaOdWRaCZSiAE2YTz65D4G8wil3Wx2T4d9WKHDw5OIJOwNrksk16NGdJnJuW1CihHVFdr3ytRaH7QKJQ97fg==",
+  "success": true,
+  "projectFilePath": "D:\\Учёба\\Projs\\Barista\\Lab11\\Barista.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Timmy Channel\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.31\\microsoft.xaml.behaviors.wpf.1.1.31.nupkg.sha512",
+    "C:\\Users\\Timmy Channel\\.nuget\\packages\\prism.core\\8.1.97\\prism.core.8.1.97.nupkg.sha512",
+    "C:\\Users\\Timmy Channel\\.nuget\\packages\\prism.wpf\\8.1.97\\prism.wpf.8.1.97.nupkg.sha512",
+    "C:\\Users\\Timmy Channel\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
